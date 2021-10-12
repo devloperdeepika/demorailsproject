@@ -1,0 +1,27 @@
+<h4>User Data</h4>
+<div class = "user-page-content">
+  <p>Id  :<%= @user.id %></p>
+  <p>First_Name  :<%= @user.first_name %></p>
+  <p> Last_Name  :<%= @user.last_name %></p>
+  <p>Email  :<%= @user.email %></p>
+</div>
+
+<div class="container">
+<h3>Stocks Data</h3>
+<table class="table table-responsive">
+    <thead>
+      <th>Name</th>
+      <th>Price</th>
+      <th colspan='3'></th> 
+    </thead>
+    <tbody>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <td><%= stock.name %></td>
+          <td><%= stock.price %></td>    
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'Back', users_path, class: "btn btn-basic" %>

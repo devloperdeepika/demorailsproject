@@ -1,0 +1,23 @@
+<div class="container">
+  <h3>All Users</h3>
+  <table class="table table-responsive">
+    <thead>
+      <th>User_Name</th>
+      <th colspan='3'></th>  
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.first_name  ,user_path(user)%></td> 
+      
+         <td><%= link_to "Add Friend",friendships_path(friendship: {:friend_id => user, :user_id =>current_user}), 
+         :method => :post,  class: "btn btn-default" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'Back', root_path, class: "btn btn-basic" %>
+
+    
+

@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Friends</h1>
+  <table class="table table-responsive">
+    <thead>
+      <th>First_Name</th>
+      <th>Last_Name</th>
+      <th>Email</th> 
+      <th>Action</th>
+      <th colspan='3'></th>
+    </thead>   
+    <tbody>  
+     <% @friendships.each do |friend_ship| %>
+
+        <tr>
+    
+          <td><%= friend_ship.friend.first_name %></td>
+          <td><%= friend_ship.friend.last_name %></td>
+          <td><%= friend_ship.friend.email %></td>
+        
+          <td><%= link_to "Remove", friendship_path(friend_ship), method: :delete,
+          data: { confirm: 'Are you sure?' },class: "btn btn-danger" %></td> 
+        </tr> 
+     <% end %>
+    </tbody>
+ </table>
+</div> 
+<%= link_to 'Back', root_path, class: "btn btn-basic" %>
+
+
+
+
+
+
+
+
+     
