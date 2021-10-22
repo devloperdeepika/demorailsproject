@@ -10,13 +10,14 @@ class StocksController < ApplicationController
   def show
     @stock = Stock.find(params[:id])
     
-  end
-   
+  end  
 
   def create
     @stock = Stock.new(stock_params)
     @stock.user_id = current_user.id
     if @stock.save
+      # UserMailer.new_stock_email(@stock).deliver_now
+
       redirect_to @stock
     else
       render :new
@@ -36,12 +37,23 @@ class StocksController < ApplicationController
     end 
   end
 
-  def destroy
-    @stock = Stock.find(params[:id])
-    @stock.destroy
+  def all_stock
+    @stocks = Stock.all
+  end 
 
-    redirect_to user_path(current_user)
+  def buy_stocks
+    if(!Stock.exists?(params[:stock_id]))
+      flash[:notice] = "Already exists" 
+    else 
+      stock =Stock.find(params[:stock_id])
+      user = current_user.id
+      buy = Buystock.create(user_id: current_user.id, stock_id: stock.id)
+      buy.save
+      flash[:notice] = "Added stock."
+      redirect_to root_url
+    end
   end
+
    
   def remove
     stock_ids = current_user.stock_ids
@@ -53,6 +65,6 @@ class StocksController < ApplicationController
   private
 
   def stock_params
-    params.require(:stock).permit(:name, :price)
+    params.require(:stock).permit(:name, :price, :image)
   end
 end 

@@ -1,0 +1,28 @@
+<div class="container">
+  <h3>All Stocks</h3>
+  <table class="table table-responsive">
+    <thead>
+      <th>Name</th>
+      <th>Price</th>  
+      <th>Image</th> 
+      <th>Action</th>
+      <th colspan='3'></th>  
+    </thead>
+    <tbody>
+      <% @stocks.each do |stock| %>
+        <tr>
+          <td><%= stock.name %></td>
+          <td><%= stock.price %></td>
+          <td><%= image_tag(stock.image, :size => "200x100") %></td> 
+       <% if can? :manage, Stock %>
+       <%else%>
+            <td><%= link_to "Buy Stock",{:controller => "stocks", :action => "buy_stocks", :stock_id => stock, :user_id =>current_user },
+            :method => :post,  class: "btn btn-default" %></td>
+       <%end%>
+      
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= link_to 'Back', root_path, class: "btn btn-basic" %>

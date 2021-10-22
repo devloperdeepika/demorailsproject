@@ -1,6 +1,8 @@
 
 <p>Name:<%= @stock.name %></p>
 <p>Price:<%= @stock.price %></p>
+<p>Image: <div style="width:200px; height:auto">
+<%= link_to image_tag(@stock.image, style:"width:100% "),stock_path %></div></p>
 
 
 <%= link_to 'Back',stocks_path, class: "btn btn-basic" %>

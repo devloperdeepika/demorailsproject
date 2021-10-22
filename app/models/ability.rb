@@ -5,7 +5,7 @@ class Ability
   def initialize(user)
     can :read, Stock, public: true    
     user ||= User.new # guest user (not logged in)
-    if user.admin == true
+    if user.user_type == 'Admin'
       can :manage, :all
     else
       can :read, :Stock

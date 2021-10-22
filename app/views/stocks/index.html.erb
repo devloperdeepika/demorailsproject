@@ -1,10 +1,13 @@
 <div class="container">
   <h1>Stocks</h1>
+  <% if can? :read, @stock %>
   <h5><%= link_to 'Add stock', new_stock_path%></h6>
+  <% end %>
   <table class="table table-responsive">
     <thead>
       <th>Name</th>
       <th>Price</th>  
+      <th>Image</th> 
       <th>Action</th>
       <th colspan='3'></th>  
     </thead>
@@ -13,13 +16,13 @@
         <tr>
           <td><%= stock.name %></td>
           <td><%= stock.price %></td>
+          <td><%= image_tag(stock.image, :size => "200x100") %></td>
           <td><%= link_to"show",stock_path(stock), class: "btn btn-info"%></td>
           <% if can? :read, @stock %>
           <td><%= link_to"edit",edit_stock_path(stock), class: "btn btn-primary"%></td>
-  
+          <% end %>
           <td><%= link_to "Remove",remove_stock_path(stock), 
           data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %></td>
-          <% end %>
         </tr>
       <% end %>
     </tbody>
